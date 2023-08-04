@@ -9,23 +9,29 @@ from django.conf import settings
 from datetime import datetime, timedelta
 import boto3
 from django.http import Http404
-from .serializers import (AvailabilitySerializer,
-                          CustomUserSerializer,
-                          MenteeListSerializer,
-                          MenteeProfileSerializer,
-                          MentorListSerializer,
-                          MentorProfileSerializer,
-                          NotificationSettingsSerializer,
-                          SessionSerializer)
-from .custom_permissions import (IsMentorMentee,
-                                 IsOwnerOrAdmin,
-                                 NotificationSettingsPermission)
-from .models import (Availability,
-                     CustomUser,
-                     Mentee,
-                     Mentor,
-                     NotificationSettings,
-                     Session)
+from .serializers import (
+    AvailabilitySerializer,
+    CustomUserSerializer,
+    MenteeListSerializer,
+    MenteeProfileSerializer,
+    MentorListSerializer,
+    MentorProfileSerializer,
+    NotificationSettingsSerializer,
+    SessionSerializer,
+)
+from .custom_permissions import (
+    IsMentorMentee,
+    IsOwnerOrAdmin,
+    NotificationSettingsPermission,
+)
+from .models import (
+    Availability,
+    CustomUser,
+    Mentee,
+    Mentor,
+    NotificationSettings,
+    Session,
+)
 
 
 # View to update the user profile information
@@ -52,8 +58,15 @@ class UserProfile(generics.RetrieveUpdateDestroyAPIView):
     def patch(self, request, *args, **kwargs):
         user = self.request.user
 
-        fields = ['first_name', 'last_name', 'email',
-                  'phone_number', 'is_mentor', 'is_mentee', 'is_active']
+        fields = [
+            'first_name',
+            'last_name',
+            'email',
+            'phone_number',
+            'is_mentor',
+            'is_mentee',
+            'is_active',
+        ]
 
         for field in fields:
             if field in request.data:
@@ -191,9 +204,10 @@ class AvailabilityListCreateView(generics.ListCreateAPIView):
         mentor = Mentor.objects.get(user=self.request.user)
         # Exclude any availability that has an end time in the past
         # and filter availabilities belonging to the logged in user's mentor
-        return Availability.objects.filter(mentor=mentor,
-                                           end_time__gte=timezone.now()
-                                           ).select_related('mentor__user')
+        return Availability.objects.filter(
+            mentor=mentor,
+            end_time__gte=timezone.now(),
+        ).select_related('mentor__user')
 
 
 # Delete an availability
@@ -219,12 +233,16 @@ class AvailabilityDeleteView(generics.DestroyAPIView):
 def time_convert(time, minutes):
     # Convert string from front end to datetime object
     datetime_obj = datetime.strptime(
-        time, '%Y-%m-%dT%H:%M:%S.%fZ').replace(tzinfo=timezone.utc)
+        time,
+        '%Y-%m-%dT%H:%M:%S.%fZ',
+    ).replace(tzinfo=timezone.utc)
     # Change time dependent on session length minutes
     datetime_delta = datetime_obj - timedelta(minutes=minutes)
     # Convert datetime object back to string
     new_start_time = datetime.strftime(
-        datetime_delta, '%Y-%m-%d %H:%M:%S%z')[:-2]
+        datetime_delta,
+        '%Y-%m-%d %H:%M:%S%z',
+    )[:-2]
     return new_start_time
 
 
