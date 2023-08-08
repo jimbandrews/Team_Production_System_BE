@@ -1,6 +1,12 @@
 from rest_framework import serializers, fields
 from django.utils import timezone
 from datetime import timedelta
+from drf_spectacular.utils import (
+    extend_schema_field,
+    extend_schema_serializer,
+    OpenApiExample,
+)
+from drf_spectacular.types import OpenApiTypes
 from .models import Mentor, Mentee, CustomUser
 from .models import Availability, Session, NotificationSettings
 
@@ -108,6 +114,7 @@ class MentorListSerializer(serializers.ModelSerializer):
                   'last_name', 'profile_photo', 'is_mentor', 'about_me',
                   'skills', 'availabilities')
 
+    @extend_schema_field(OpenApiTypes.STR)
     def get_about_me(self, obj):
         try:
             mentor = Mentor.objects.get(user=obj.pk)
@@ -152,24 +159,69 @@ class MenteeListSerializer(serializers.ModelSerializer):
 
 
 # Serializer to show session information
+@extend_schema_serializer(
+    examples=[
+        OpenApiExample(
+            name='Example',
+            value={
+                'pk': 6,
+                'mentor_first_name': 'Test',
+                'mentor_last_name': 'Mentor',
+                'username': 'testusername',
+                'first_name': 'Test',
+                'last_name': 'User',
+                'email': 'testuser@testemail.com',
+                'phone_number': '555-123-4567',
+                'profile_photo': 'null',
+                'is_mentor': True,
+                'is_mentee': False,
+                'is_active': True,
+            },
+            response_only=True,
+        ),
+    ]
+)
 class SessionSerializer(serializers.ModelSerializer):
-    mentor_first_name = serializers.SlugField(source='mentor.user.first_name',
-                                              read_only=True)
-    mentor_last_name = serializers.SlugField(source='mentor.user.last_name',
-                                             read_only=True)
-    mentee_first_name = serializers.SlugField(source='mentee.user.first_name',
-                                              read_only=True)
-    mentee_last_name = serializers.SlugField(source='mentee.user.last_name',
-                                             read_only=True)
+    mentor_first_name = serializers.SlugField(
+        source='mentor.user.first_name',
+        read_only=True,
+    )
+    mentor_last_name = serializers.SlugField(
+        source='mentor.user.last_name',
+        read_only=True,
+    )
+    mentee_first_name = serializers.SlugField(
+        source='mentee.user.first_name',
+        read_only=True,
+    )
+    mentee_last_name = serializers.SlugField(
+        source='mentee.user.last_name',
+        read_only=True,
+    )
 
     class Meta:
         model = Session
-        fields = ('pk', 'mentor_first_name', 'mentor_last_name',
-                  'mentor_availability', 'mentee', 'mentee_first_name',
-                  'mentee_last_name', 'start_time', 'end_time', 'status',
-                  'session_length',)
-        read_only_fields = ('mentor', 'mentor_first_name', 'mentor_last_name',
-                            'mentee', 'mentee_first_name', 'mentee_last_name')
+        fields = (
+            'pk',
+            'mentor_first_name',
+            'mentor_last_name',
+            'mentor_availability',
+            'mentee',
+            'mentee_first_name',
+            'mentee_last_name',
+            'start_time',
+            'end_time',
+            'status',
+            'session_length',
+        )
+        read_only_fields = (
+            'mentor',
+            'mentor_first_name',
+            'mentor_last_name',
+            'mentee',
+            'mentee_first_name',
+            'mentee_last_name',
+        )
 
 
 # Serializer for notification settings
