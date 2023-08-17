@@ -27,6 +27,7 @@ celery = "*"
 redis = "*"
 coverage = "*"
 django-celery-beat = "*"
+drf-spectacular = "*"
 
 [dev-packages]
 autopep8 = "*"
