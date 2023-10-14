@@ -133,6 +133,11 @@ If you want to connect to the container database via an app like Postico 2, the 
 	- User: mentors
 	- Password: mentors
 
+While running, the Django server will automatically detect changes made and
+reload, just as if it was running in your local environment.
+Certain file changes, such as to a model, won't trigger this behavior.
+In these cases, stop then restart the containers.
+
 To stop running the containers, hit Ctrl+C, then spin down the containers:
 ```bash
 docker compose down
@@ -403,17 +408,18 @@ No body returned for response
 GET - https://team-production-system.onrender.com/myprofile/
 ```
 
-| Body            | Type        | Description                  |
-| :-------------- | :---------- | :--------------------------- |
-| `username`      | `string`    | Username                     |
-| `first_name`    | `string`    | User generated first name    |
-| `last_name`     | `string`    | User generated last name     |
-| `email`         | `string`    | User generated email         |
-| `phone_number`  | `string`    | User generated phone number  |
-| `profile_photo` | `form-data` | User submitted profile photo |
-| `is_mentor`     | `boolean`   | Is mentor flag               |
-| `is_mentee`     | `boolean`   | Is mentee flag               |
-| `is_active`     | `boolean`   | Is active flag               |
+| Body            | Type        | Description                         |
+| :-------------- | :---------- | :---------------------------------- |
+| `username`      | `string`    | Username                            |
+| `first_name`    | `string`    | User generated first name           |
+| `last_name`     | `string`    | User generated last name            |
+| `email`         | `string`    | User generated email                |
+| `phone_number`  | `string`    | User generated phone number         |
+| `team_number`   | `integer`   | User generated Momentum team number |
+| `profile_photo` | `form-data` | User submitted profile photo        |
+| `is_mentor`     | `boolean`   | Is mentor flag                      |
+| `is_mentee`     | `boolean`   | Is mentee flag                      |
+| `is_active`     | `boolean`   | Is active flag                      |
 
 #### Request Sample:
 
@@ -439,6 +445,7 @@ Host: https://team-production-system.onrender.com
 	"last_name": "",
 	"email": "testuser@testemail.com",
 	"phone_number": null,
+	"team_number": null,
 	"profile_photo": null,
 	"is_mentor": false,
 	"is_mentee": false,
@@ -458,17 +465,18 @@ Host: https://team-production-system.onrender.com
 PATCH - https://team-production-system.onrender.com/myprofile/
 ```
 
-| Body            | Type        | Description                  |
-| :-------------- | :---------- | :--------------------------- |
-| `username`      | `string`    | Username                     |
-| `first_name`    | `string`    | User generated first name    |
-| `last_name`     | `string`    | User generated last name     |
-| `email`         | `string`    | User generated email         |
-| `phone_number`  | `string`    | User generated phone number  |
-| `profile_photo` | `form-data` | User submitted profile photo |
-| `is_mentor`     | `boolean`   | Is mentor flag               |
-| `is_mentee`     | `boolean`   | Is mentee flag               |
-| `is_active`     | `boolean`   | Is active flag               |
+| Body            | Type        | Description                         |
+| :-------------- | :---------- | :---------------------------------- |
+| `username`      | `string`    | Username                            |
+| `first_name`    | `string`    | User generated first name           |
+| `last_name`     | `string`    | User generated last name            |
+| `email`         | `string`    | User generated email                |
+| `phone_number`  | `string`    | User generated phone number         |
+| `team_number`   | `integer`   | User generated Momentum team number |
+| `profile_photo` | `form-data` | User submitted profile photo        |
+| `is_mentor`     | `boolean`   | Is mentor flag                      |
+| `is_mentee`     | `boolean`   | Is mentee flag                      |
+| `is_active`     | `boolean`   | Is active flag                      |
 
 #### Request Sample:
 
@@ -487,6 +495,7 @@ Host: https://team-production-system.onrender.com
 		"last_name": "testuserlastname",
 		"email": "testuser@testemail.com",
 		"phone_number": "+12345678987",
+		"team_number": 10,
 		"profile_photo": ".../testuser.jpg",
 		"is_mentor": true
 	}
@@ -504,6 +513,7 @@ Host: https://team-production-system.onrender.com
 	"last_name": "testuserlastname",
 	"email": "testuser@testemail.com",
 	"phone_number": "+12345678987",
+	"team_number": 10,
 	"profile_photo": ".../testuser.jpg",
 	"is_mentor": true,
 	"is_mentee": false,
