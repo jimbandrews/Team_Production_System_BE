@@ -15,6 +15,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
             'last_name',
             'email',
             'phone_number',
+            'team_number',
             'profile_photo',
             'is_mentor',
             'is_mentee',

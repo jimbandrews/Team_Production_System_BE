@@ -16,6 +16,7 @@ class CustomUser(AbstractUser):
     email = models.EmailField(max_length=75, unique=True)
     phone_number = PhoneNumberField(
         null=True, blank=True, unique=True, default=None)
+    team_number = models.IntegerField(null=True, blank=True, default=None)
     profile_photo = models.ImageField(
         upload_to='profile_photo', blank=True, null=True)
 
