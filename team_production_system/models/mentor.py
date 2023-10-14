@@ -37,8 +37,12 @@ class Mentor(models.Model):
         CustomUser, on_delete=models.CASCADE, primary_key=True)
     about_me = models.TextField(max_length=1000, default='')
     team_number = models.IntegerField(default=0)
-    skills = MultiSelectField(choices=SKILLS_CHOICES,
-                              max_choices=19, max_length=157, default='HTML')
+    skills = MultiSelectField(
+        choices=SKILLS_CHOICES,
+        max_choices=19,
+        max_length=157,
+        default='HTML',
+    )
 
     def __str__(self):
         return self.user.username
