@@ -198,8 +198,8 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ),
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.AcceptHeaderVersioning',
-    'DEFAULT_VERSION': 'v1',
-    'ALLOWED_VERSIONS': ['v1', 'v2'],
+    'DEFAULT_VERSION': 1,
+    'ALLOWED_VERSIONS': [1, 2],
 }
 
 DOMAIN = 'momentors.dev'
