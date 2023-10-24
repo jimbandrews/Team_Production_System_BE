@@ -3,7 +3,7 @@ from django.db.models.constraints import UniqueConstraint
 from django.db import models
 
 
-# Allow mentors to set their avaliabiltiy
+# Allow mentors to set their availability
 class Availability(models.Model):
     mentor = models.ForeignKey(
         Mentor, on_delete=models.CASCADE, related_name='mentor_availability')
