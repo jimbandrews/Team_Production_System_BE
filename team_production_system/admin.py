@@ -8,7 +8,6 @@ from .models import (
     NotificationSettings
 )
 
-# admin.site.register(UserAdmin)
 admin.site.register(CustomUser)
 admin.site.register(Mentor)
 admin.site.register(Mentee)
