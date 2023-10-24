@@ -55,6 +55,7 @@ class AvailabilitySerializer(serializers.ModelSerializer):
             availability = Availability.objects.create(
                 mentor=mentor, **validated_data)
             return availability
+
         raise serializers.ValidationError(
             "Input overlaps with existing availability.")
 
@@ -67,6 +68,7 @@ class AvailabilitySerializer(serializers.ModelSerializer):
         if start_time >= end_time:
             raise serializers.ValidationError(
                 'End time must be after start time.')
+
         return data
 
     def validate_end_time(self, value):
@@ -77,6 +79,7 @@ class AvailabilitySerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 'End time must be in the future.'
             )
+
         return value
 
     # TODO: Add validation for start times
