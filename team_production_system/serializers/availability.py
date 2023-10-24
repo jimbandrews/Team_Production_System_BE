@@ -1,9 +1,7 @@
-from rest_framework import serializers
 from django.utils import timezone
-from team_production_system.models import (
-    Mentor,
-    Availability,
-)
+from rest_framework import serializers
+
+from team_production_system.models import Availability, Mentor
 
 
 # The mentor availability serializer

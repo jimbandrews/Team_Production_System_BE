@@ -2,9 +2,9 @@
 
 from .availability import AvailabilitySerializer
 from .custom_user import CustomUserSerializer
-from .mentor_profile import MentorProfileSerializer
-from .mentor_list import MentorListSerializer
-from .mentee_profile import MenteeProfileSerializer
 from .mentee_list import MenteeListSerializer
-from .session import SessionSerializer
+from .mentee_profile import MenteeProfileSerializer
+from .mentor_list import MentorListSerializer
+from .mentor_profile import MentorProfileSerializer
 from .notification_settings import NotificationSettingsSerializer
+from .session import SessionSerializer

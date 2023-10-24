@@ -1,8 +1,9 @@
+from django.utils import timezone
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
-from django.utils import timezone
+
+from team_production_system.models import Availability, Mentor
 from team_production_system.serializers import AvailabilitySerializer
-from team_production_system.models import Mentor, Availability
 
 
 # Create and view all availabilities
