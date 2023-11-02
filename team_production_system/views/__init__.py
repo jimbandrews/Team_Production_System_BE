@@ -16,3 +16,4 @@ from .session_request_detail import SessionRequestDetailView
 from .session_request_list_create import SessionRequestView
 from .session_signup_list import SessionSignUpListView
 from .user_profile import UserProfile
+from .user_profile_v2 import UserProfileV2

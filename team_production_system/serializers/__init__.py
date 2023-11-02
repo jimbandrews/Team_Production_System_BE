@@ -8,3 +8,4 @@ from .mentor_list import MentorListSerializer
 from .mentor_profile import MentorProfileSerializer
 from .notification_settings import NotificationSettingsSerializer
 from .session import SessionSerializer
+from .user_profile import UserProfileSerializer

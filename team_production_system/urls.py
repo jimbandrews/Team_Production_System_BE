@@ -5,6 +5,9 @@ from team_production_system import views
 urlpatterns = [
     # User endpoints
     path('myprofile/', views.UserProfile.as_view(), name='my-profile'),
+    # Test endpoint
+    # TODO: remove once done configuring serializer and view
+    path('testprofile/', views.UserProfileV2.as_view(), name='test-profile'),
     # Mentor end points
     path('mentor/', views.MentorList.as_view(), name='mentor-list'),
     path('mentorinfo/', views.MentorInfoView.as_view(), name='mentor-info'),
