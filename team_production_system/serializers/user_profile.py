@@ -6,7 +6,6 @@ from . import (
     MenteeProfileSerializer,
     MentorProfileSerializer,
     NotificationSettingsSerializer,
-    SessionSerializer,
 )
 
 
@@ -16,7 +15,6 @@ class UserProfileSerializer(serializers.ModelSerializer):
     mentor_info = MentorProfileSerializer(read_only=True, source='mentor')
     mentee_info = MenteeProfileSerializer(read_only=True, source='mentee')
     notification_settings = NotificationSettingsSerializer(read_only=True)
-    sessions = SessionSerializer(many=True, read_only=True)
 
     class Meta:
         model = CustomUser
@@ -34,5 +32,4 @@ class UserProfileSerializer(serializers.ModelSerializer):
             'mentee_info',
             'mentor_info',
             'notification_settings',
-            'sessions',
         ]
